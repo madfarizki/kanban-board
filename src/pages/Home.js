@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import {
     Header,
     HeaderText,
+    Button,
     GroupLabel,
     BoxContainer,
     GroupDesc,
@@ -15,7 +16,10 @@ import {
     Setting,
     SettingMenu,
     NewItemButton,
-    ModalAddNewItem, Button
+    ModalAddNewItem,
+    ModalAddNewGroup,
+    ModalEditItem,
+    ModalDeleteItem,
 } from "../components";
 import { groups, items } from "../constants";
 
@@ -30,10 +34,49 @@ export default function Home() {
     const [modalType, setModalType] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [groupID, setGroupID] = useState("");
+    const [selectedItem, setSelectedItem] = useState({});
     const [load, setLoad] = useState(new Date().getTime());
 
     return (
         <>
+            // Modal components for adding new group, adding new item, editing item, and deleting item
+            {modalType === MODAL_SHOW.ADD_NEW_GROUP && (
+                <ModalAddNewGroup
+                    show={showModal}
+                    onHideModal={setShowModal}
+                    setStateLoad={setLoad}
+                />
+            )}
+
+            {modalType === MODAL_SHOW.ADD_NEW_ITEM && (
+                <ModalAddNewItem
+                    show={showModal}
+                    onHideModal={setShowModal}
+                    groupID={groupID}
+                    setStateLoad={setLoad}
+                />
+            )}
+
+            {modalType === MODAL_SHOW.EDIT_ITEM && (
+                <ModalEditItem
+                    show={showModal}
+                    onHideModal={setShowModal}
+                    item={selectedItem}
+                    setStateLoad={setLoad}
+                />
+            )}
+
+            {modalType === MODAL_SHOW.DELETE_ITEM && (
+                <ModalDeleteItem
+                    show={showModal}
+                    onHideModal={setShowModal}
+                    groupID={groupID}
+                    taskID={selectedItem.id}
+                    setStateLoad={setLoad}
+                />
+            )}
+
+            {/* Header section */}
             <section>
                 <Header>
                     <HeaderText>Product Roadmap</HeaderText>
@@ -49,6 +92,7 @@ export default function Home() {
                 </Header>
             </section>
 
+            {/* Main section */}
             <section className="main">
                 {groups.map((group) => {
                     const groupItems = items[group.id];
@@ -75,10 +119,22 @@ export default function Home() {
                                                     <SettingMenu color="primary" icon={<FiArrowLeft />} >
                                                         Move Left
                                                     </SettingMenu>
-                                                    <SettingMenu color="primary" icon={<BiEditAlt />} >
+                                                    <SettingMenu color="primary" icon={<BiEditAlt />}
+                                                                 onClick={() => {
+                                                                    setGroupID(group?.id);
+                                                                    setSelectedItem(item);
+                                                                    setModalType(MODAL_SHOW.EDIT_ITEM);
+                                                                    setShowModal(true);
+                                                    }}>
                                                         Edit
                                                     </SettingMenu>
-                                                    <SettingMenu color="danger" icon={<BiTrash />} >
+                                                    <SettingMenu color="danger" icon={<BiTrash />}
+                                                                onClick={() => {
+                                                                setGroupID(group?.id);
+                                                                setSelectedItem(item);
+                                                                setModalType(MODAL_SHOW.DELETE_ITEM);
+                                                                setShowModal(true);
+                                                    }}>
                                                         Delete
                                                     </SettingMenu>
                                                 </div>
@@ -103,15 +159,6 @@ export default function Home() {
                     );
                 })}
             </section>
-
-            {modalType === MODAL_SHOW.ADD_NEW_ITEM && (
-                <ModalAddNewItem
-                    show={showModal}
-                    onHideModal={setShowModal}
-                    groupID={groupID}
-                    setStateLoad={setLoad}
-                />
-            )}
         </>
     );
 }

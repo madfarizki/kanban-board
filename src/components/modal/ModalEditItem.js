@@ -1,23 +1,27 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {Button, Input, InputLabel, ModalBody, ModalContent, ModalFooter} from "../index";
 
-export default function ModalAddNewItem({
-    show = false,
-    onHideModal = () => {},
-    groupID = "",
-    setStateLoad,
+export default function ModalEditItem({
+  show = false,
+  onHideModal = () => {},
+  item = {},
+  setStateLoad,
 }) {
-    const [newItem, setNewItem] = useState({ name: "", progress_percentage: "" });
+    const [editItem, setEditItem] = useState({ name: item.name, progress: item.progress_percentage });
+
+    useEffect(() => {
+        setEditItem({ name: item.name, progress: item.progress_percentage });
+    }, [item]);
 
     return (
-        <ModalBody show={show} onHideModal={onHideModal} title="Create Task">
+        <ModalBody show={show} onHideModal={onHideModal} title="Edit Task">
             <ModalContent>
                 <div style={{ marginBottom: "16px" }}>
                     <InputLabel>Task Name</InputLabel>
                     <Input
-                        placeholder="Type your Task"
-                        value={newItem.name}
-                        onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+                        placeholder="Type your task"
+                        value={editItem.name}
+                        onChange={(e) => setEditItem({ ...editItem, name: e.target.value })}
                     />
                 </div>
                 <div style={{ width: "143px" }}>
@@ -25,8 +29,8 @@ export default function ModalAddNewItem({
                     <Input
                         type="number"
                         placeholder="70%"
-                        value={newItem.progress_percentage}
-                        onChange={(e) => setNewItem({ ...newItem, progress_percentage: e.target.value })}
+                        value={editItem.progress}
+                        onChange={(e) => setEditItem({ ...editItem, progress: e.target.value })}
                     />
                 </div>
             </ModalContent>
@@ -37,5 +41,5 @@ export default function ModalAddNewItem({
                 </Button>
             </ModalFooter>
         </ModalBody>
-    )
+    );
 }

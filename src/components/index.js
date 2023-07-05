@@ -13,6 +13,9 @@ import SettingMenu from "./setting/SettingMenu";
 import NewItemButton from "./item/NewItemButton";
 import ModalBody from "./modal/ModalBody";
 import ModalAddNewItem from "./modal/ModalAddNewItem";
+import ModalAddNewGroup from "./modal/ModalAddNewGroup";
+import ModalEditItem from "./modal/ModalEditItem";
+import ModalDeleteItem from "./modal/ModalDeleteItem";
 import ModalContent from "./modal/ModalContent"
 import ModalFooter from "./modal/ModalFooter";
 import InputLabel from "./input/InputLabel";
@@ -34,6 +37,9 @@ export {
     NewItemButton,
     ModalBody,
     ModalAddNewItem,
+    ModalAddNewGroup,
+    ModalEditItem,
+    ModalDeleteItem,
     ModalContent,
     ModalFooter,
     InputLabel,
