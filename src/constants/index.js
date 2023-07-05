@@ -55,6 +55,7 @@ export const colors = {
         MAIN: "#01959F",
         BORDER: "#4DB5BC",
         SURFACE: "#F7FEFF",
+        FOCUS: "#01959F33"
     },
     SECONDARY: {
         BORDER: "#FEEABC",

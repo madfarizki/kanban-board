@@ -52,10 +52,6 @@ const StyledSettingMenuText = styled.p`
     margin: 0;
 `;
 
-const StyledIcon = styled.span`
-  font-size: ${({ size }) => (size ? size : "16px")};
-`;
-
 export default function SettingMenu({ color, icon, children, onClick = () => {} }) {
     return (
         <StyledSettingMenu color={color} onClick={onClick}>

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { colors } from "../constants";
 
 export const BoxColors = {
@@ -8,7 +8,7 @@ export const BoxColors = {
     SUCCESS: "success",
 };
 
-const StyledBox = styled.div`
+const boxStyles = css`
   box-sizing: border-box;
   padding: 16px;
   min-width: 326px;
@@ -18,58 +18,47 @@ const StyledBox = styled.div`
   border-radius: 4px;
   gap: 8px;
   height: fit-content;
+  font-style: normal;
+  color: ${colors.PRIMARY.MAIN};
+`;
 
-  background: ${({ color }) => {
-    let hexColor = "";
+const primaryStyles = css`
+  background: ${colors.PRIMARY.SURFACE};
+  border: 1px solid ${colors.PRIMARY.MAIN};
+`;
+
+const secondaryStyles = css`
+  background: ${colors.SECONDARY.SURFACE};
+  border: 1px solid ${colors.SECONDARY.BORDER};
+  color: ${colors.SECONDARY.PRESSED};
+`;
+
+const dangerStyles = css`
+  background: ${colors.DANGER.SURFACE};
+  border: 1px solid ${colors.DANGER.BORDER};
+  color: ${colors.DANGER.MAIN};
+`;
+
+const successStyles = css`
+  background: ${colors.SUCCESS.SURFACE};
+  border: 1px solid ${colors.SUCCESS.BORDER};
+  color: ${colors.SUCCESS.MAIN};
+`;
+
+const StyledBox = styled.div`
+  ${boxStyles}
+
+  ${({ color }) => {
     switch (color) {
         case BoxColors.SECONDARY:
-            hexColor = colors.SECONDARY.SURFACE;
-            break;
+            return secondaryStyles;
         case BoxColors.DANGER:
-            hexColor = colors.DANGER.SURFACE;
-            break;
+            return dangerStyles;
         case BoxColors.SUCCESS:
-            hexColor = colors.SUCCESS.SURFACE;
-            break;
+            return successStyles;
         default:
-            hexColor = colors.PRIMARY.SURFACE;
+            return primaryStyles;
     }
-    return hexColor;
-}};
-  border: 1px solid
-    ${({ color }) => {
-    let hexColor = "";
-    switch (color) {
-        case BoxColors.SECONDARY:
-            hexColor = colors.SECONDARY.BORDER;
-            break;
-        case BoxColors.DANGER:
-            hexColor = colors.DANGER.BORDER;
-            break;
-        case BoxColors.SUCCESS:
-            hexColor = colors.SUCCESS.BORDER;
-            break;
-        default:
-            hexColor = colors.PRIMARY.MAIN;
-    }
-    return hexColor;
-}};
-  color: ${({ color }) => {
-    let hexColor = "";
-    switch (color) {
-        case BoxColors.SECONDARY:
-            hexColor = colors.SECONDARY.PRESSED;
-            break;
-        case BoxColors.DANGER:
-            hexColor = colors.DANGER.MAIN;
-            break;
-        case BoxColors.SUCCESS:
-            hexColor = colors.SUCCESS.MAIN;
-            break;
-        default:
-            hexColor = colors.PRIMARY.MAIN;
-    }
-    return hexColor;
 }};
 `;
 

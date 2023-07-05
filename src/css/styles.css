@@ -6,6 +6,10 @@ body {
     min-height: 100vh;
 }
 
+input {
+    font-family: "Nunito Sans", sans-serif;
+}
+
 section.main {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { colors } from "../../constants";
 
 export const GroupLabelColors = {
@@ -6,71 +6,60 @@ export const GroupLabelColors = {
     SECONDARY: "secondary",
     DANGER: "danger",
     SUCCESS: "success",
-}
+};
+
+const labelStyles = css`
+  box-sizing: border-box;
+  padding: 2px 8px;
+  height: 24px;
+  margin: 0;
+  width: max-content;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+`;
+
+const primaryStyles = css`
+  background: ${colors.PRIMARY.SURFACE};
+  border: 1px solid ${colors.PRIMARY.BORDER};
+  color: ${colors.PRIMARY.MAIN};
+`;
+
+const secondaryStyles = css`
+  background: ${colors.SECONDARY.SURFACE};
+  border: 1px solid ${colors.SECONDARY.BORDER};
+  color: ${colors.SECONDARY.PRESSED};
+`;
+
+const dangerStyles = css`
+  background: ${colors.DANGER.SURFACE};
+  border: 1px solid ${colors.DANGER.BORDER};
+  color: ${colors.DANGER.MAIN};
+`;
+
+const successStyles = css`
+  background: ${colors.SUCCESS.SURFACE};
+  border: 1px solid ${colors.SUCCESS.BORDER};
+  color: ${colors.SUCCESS.MAIN};
+`;
 
 const StyledGroupLabel = styled.p`
-    box-sizing: border-box;
-    padding: 2px 8px;
-    height: 24px;
-    margin: 0;
-    width: max-content;
-    background: ${({ color }) => {
-    let hexColor = "";
+  ${labelStyles}
+
+  ${({ color }) => {
     switch (color) {
         case GroupLabelColors.SECONDARY:
-            hexColor = colors.SECONDARY.SURFACE;
-            break;
+            return secondaryStyles;
         case GroupLabelColors.DANGER:
-            hexColor = colors.DANGER.SURFACE;
-            break;
+            return dangerStyles;
         case GroupLabelColors.SUCCESS:
-            hexColor = colors.SUCCESS.SURFACE;
-            break;
+            return successStyles;
         default:
-            hexColor = colors.PRIMARY.SURFACE;
+            return primaryStyles;
     }
-    return hexColor;
 }};
-    border: 1px solid
-        ${({ color }) => {
-    let hexColor = "";
-    switch (color) {
-        case GroupLabelColors.SECONDARY:
-            hexColor = colors.SECONDARY.BORDER;
-            break;
-        case GroupLabelColors.DANGER:
-            hexColor = colors.DANGER.BORDER;
-            break;
-        case GroupLabelColors.SUCCESS:
-            hexColor = colors.SUCCESS.BORDER;
-            break;
-        default:
-            hexColor = colors.PRIMARY.BORDER;
-    }
-    return hexColor;
-}};
-    border-radius: 4px;
-    color: ${({ color }) => {
-    let hexColor = "";
-    switch (color) {
-        case GroupLabelColors.SECONDARY:
-            hexColor = colors.SECONDARY.PRESSED;
-            break;
-        case GroupLabelColors.DANGER:
-            hexColor = colors.DANGER.MAIN;
-            break;
-        case GroupLabelColors.SUCCESS:
-            hexColor = colors.SUCCESS.MAIN;
-            break;
-        default:
-            hexColor = colors.PRIMARY.MAIN;
-    }
-    return hexColor;
-}};
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 20px;
 `;
 
 export default function GroupLabel(props) {
