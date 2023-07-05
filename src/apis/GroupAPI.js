@@ -12,3 +12,16 @@ export const getGroups = (payload) => {
             });
     });
 };
+
+export const addGroup = (payload) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`/todos`, payload)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+};

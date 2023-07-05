@@ -70,11 +70,11 @@ export default function Home() {
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
+    }, [load]);
 
     useEffect(() => {
         getItemsForGroups();
-    }, [groupData]);
+    }, []);
 
     const getItemsForGroups = () => {
         groupData.forEach((group) => {
@@ -165,7 +165,7 @@ export default function Home() {
                     const color = colors[(idx - 1) % colors.length];
 
                     return (
-                        <BoxContainer color={color} key={group.index}>
+                        <BoxContainer color={color} key={index}>
                             <GroupLabel color={color}>{group.title}</GroupLabel>
                             <GroupDesc>{group.description}</GroupDesc>
 
