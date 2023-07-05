@@ -21,12 +21,12 @@ export const items = {
     1: [
         {
             id: 1,
-            name: "Redesign page",
+            name: "Re-designed the zero-g doggie bags. No more spills!",
             done: null,
             todo_id: 1,
             created_at: "2021-04-21T00:12:06.116Z",
             updated_at: "2021-04-21T00:12:06.116Z",
-            progress_percentage: null,
+            progress_percentage: 100,
         },
         {
             id: 2,

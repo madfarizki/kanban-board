@@ -14,3 +14,10 @@ section.main {
     padding: 24px;
 }
 
+section.main .container {
+    width: 100%;
+    padding: 4px 0;
+    display: flex;
+    gap: 26px;
+}
+
