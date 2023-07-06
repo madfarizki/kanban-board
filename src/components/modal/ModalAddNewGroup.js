@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Button, Input, InputLabel, ModalBody, ModalContent, ModalFooter} from "../index";
+import {Button, Input, InputLabel, InputTextarea, ModalBody, ModalContent, ModalFooter} from "../index";
 import { addGroup } from "../../apis/GroupAPI";
 
 export default function ModalAddNewGroup({ show = false, onHideModal = () => {}, setStateLoad }) {
@@ -39,7 +39,7 @@ export default function ModalAddNewGroup({ show = false, onHideModal = () => {},
                 </div>
                 <div>
                     <InputLabel>Description</InputLabel>
-                    <Input
+                    <InputTextarea
                         placeholder="Group description"
                         value={newGroup.description}
                         onChange={(e) => setNewGroup({ ...newGroup, description: e.target.value })}

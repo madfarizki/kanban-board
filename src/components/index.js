@@ -20,6 +20,7 @@ import ModalContent from "./modal/ModalContent"
 import ModalFooter from "./modal/ModalFooter";
 import InputLabel from "./input/InputLabel";
 import Input from "./input/Input";
+import InputTextarea from "./input/InputTextarea";
 
 export {
     Header,
@@ -43,5 +44,6 @@ export {
     ModalContent,
     ModalFooter,
     InputLabel,
-    Input
+    Input,
+    InputTextarea
 };
