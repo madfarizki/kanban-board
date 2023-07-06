@@ -1,6 +1,7 @@
 import { BsExclamationTriangle } from "react-icons/bs";
 import { colors } from "../../constants";
 import {Button,ModalBody, ModalContent, ModalFooter} from "../index";
+import {deleteItem} from "../../apis/ItemAPI";
 
 export default function ModalDeleteItem({
     show = false,
@@ -9,6 +10,27 @@ export default function ModalDeleteItem({
     itemID = "",
     setStateLoad,
 }) {
+
+    const destroyItem = () => {
+
+        // Check if groupID or itemID is missing
+        if (!groupID || !itemID) {
+            alert("Group ID atau Item ID tidak ditemukan!");
+            return;
+        }
+
+        // Call API function for delete the item
+        deleteItem(groupID, itemID)
+            .then((response) => {
+                alert('Task berhasil dihapus.');
+                if (setStateLoad) setStateLoad(new Date().getTime());
+                onHideModal(false);
+            })
+            .catch((error) => {
+                alert("Error saat menghapus data.", error);
+            });
+    };
+
     return (
         <ModalBody
             show={show}
@@ -29,7 +51,7 @@ export default function ModalDeleteItem({
             </ModalContent>
             <ModalFooter>
                 <Button onClick={() => onHideModal(false)}>Cancel</Button>
-                <Button color="danger" onClick="">
+                <Button color="danger" onClick={destroyItem}>
                     Delete
                 </Button>
             </ModalFooter>

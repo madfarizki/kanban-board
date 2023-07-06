@@ -1,5 +1,6 @@
 import axios from '../axios.js';
 
+// Fetch all groups
 export const getGroups = (payload) => {
     return new Promise((resolve, reject) => {
         axios
@@ -13,6 +14,7 @@ export const getGroups = (payload) => {
     });
 };
 
+// Add new group
 export const addGroup = (payload) => {
     return new Promise((resolve, reject) => {
         axios

@@ -7,11 +7,13 @@ export default function ModalAddNewGroup({ show = false, onHideModal = () => {},
 
     const createGroup = () => {
 
+        // Check if newGroup title or description is empty
         if (!newGroup.title || !newGroup.description) {
             alert("Group Title dan Description harus diisi!");
             return;
         }
 
+        // Call API function to add new group
         addGroup(newGroup)
             .then((response) => {
                 alert('Group baru berhasil dibuat.');

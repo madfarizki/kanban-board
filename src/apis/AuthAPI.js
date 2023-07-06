@@ -1,5 +1,6 @@
 import axios from '../axios.js';
 
+// Auth login
 export const signIn = (payload) => {
     return new Promise((resolve, reject) => {
         axios

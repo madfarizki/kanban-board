@@ -21,7 +21,6 @@ import {
     ModalEditItem,
     ModalDeleteItem,
 } from "../components";
-import { groups, items } from "../constants";
 import { signIn } from "../apis/AuthAPI";
 import { getGroups } from "../apis/GroupAPI";
 import { getItems } from "../apis/ItemAPI";
@@ -43,38 +42,41 @@ export default function Home() {
     const [load, setLoad] = useState(new Date().getTime());
 
     useEffect(() => {
-        // Auto login by using default user
-        if (!localStorage.getItem('token')) {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
             const payload = {
                 email: 'mad@email.com',
                 password: 'password',
             };
 
             signIn(payload)
-                .then((response) => {
-                    console.log('Login success');
-                })
-                .catch((error) => {
-                    console.error(error.response.data.message);
-                });
+              .then(() => {
+                  console.log('Login success');
+                  fetchGroups();
+              })
+              .catch((error) => {
+                  console.error(error.response.data.message);
+              });
+        } else {
+            fetchGroups();
         }
-    }, []);
-
-
-    useEffect(() => {
-        getGroups()
-            .then((response) => {
-                const data = response.data;
-                setGroupData(data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
     }, [load]);
+
+    const fetchGroups = () => {
+        getGroups()
+          .then((response) => {
+              const data = response.data;
+              setGroupData(data);
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+    };
 
     useEffect(() => {
         getItemsForGroups();
-    }, []);
+    }, [groupData]);
 
     const getItemsForGroups = () => {
         groupData.forEach((group) => {
@@ -168,50 +170,51 @@ export default function Home() {
                         <BoxContainer color={color} key={index}>
                             <GroupLabel color={color}>{group.title}</GroupLabel>
                             <GroupDesc>{group.description}</GroupDesc>
-
-                            {groupItems && groupItems.length > 0 ? (
-                                groupItems.map((item, index) => (
-                                    <BoxItem key={index}>
-                                        <ItemName>{item.name}</ItemName>
-                                        <BorderLine />
-                                        <div className="container">
-                                            <div style={{ width: "100%" }}>
-                                                <ProgressBar progress={item.progress_percentage} />
-                                            </div>
-                                            <Setting>
-                                                <div>
-                                                    <SettingMenu color="primary" icon={<FiArrowRight />} >
-                                                        Move Right
-                                                    </SettingMenu>
-                                                    <SettingMenu color="primary" icon={<FiArrowLeft />} >
-                                                        Move Left
-                                                    </SettingMenu>
-                                                    <SettingMenu color="primary" icon={<BiEditAlt />}
-                                                                 onClick={() => {
+                            <div style={{display: 'flex', flexDirection:'column', gap: '12px', width: '100%'}}>
+                                {groupItems && groupItems.length > 0 ? (
+                                    groupItems.map((item, index) => (
+                                        <BoxItem key={index}>
+                                            <ItemName>{item.name}</ItemName>
+                                            <BorderLine />
+                                            <div className="container">
+                                                <div style={{ width: "100%" }}>
+                                                    <ProgressBar progress={item.progress_percentage} />
+                                                </div>
+                                                <Setting>
+                                                    <div>
+                                                        <SettingMenu color="primary" icon={<FiArrowRight />} >
+                                                            Move Right
+                                                        </SettingMenu>
+                                                        <SettingMenu color="primary" icon={<FiArrowLeft />} >
+                                                            Move Left
+                                                        </SettingMenu>
+                                                        <SettingMenu color="primary" icon={<BiEditAlt />}
+                                                                     onClick={() => {
+                                                                        setGroupID(group?.id);
+                                                                        setSelectedItem(item);
+                                                                        setModalType(MODAL_SHOW.EDIT_ITEM);
+                                                                        setShowModal(true);
+                                                        }}>
+                                                            Edit
+                                                        </SettingMenu>
+                                                        <SettingMenu color="danger" icon={<BiTrash />}
+                                                                    onClick={() => {
                                                                     setGroupID(group?.id);
                                                                     setSelectedItem(item);
-                                                                    setModalType(MODAL_SHOW.EDIT_ITEM);
+                                                                    setModalType(MODAL_SHOW.DELETE_ITEM);
                                                                     setShowModal(true);
-                                                    }}>
-                                                        Edit
-                                                    </SettingMenu>
-                                                    <SettingMenu color="danger" icon={<BiTrash />}
-                                                                onClick={() => {
-                                                                setGroupID(group?.id);
-                                                                setSelectedItem(item);
-                                                                setModalType(MODAL_SHOW.DELETE_ITEM);
-                                                                setShowModal(true);
-                                                    }}>
-                                                        Delete
-                                                    </SettingMenu>
-                                                </div>
-                                            </Setting>
-                                        </div>
-                                    </BoxItem>
-                                ))
-                            ) : (
-                                <BoxItem>No Task</BoxItem>
-                            )}
+                                                        }}>
+                                                            Delete
+                                                        </SettingMenu>
+                                                    </div>
+                                                </Setting>
+                                            </div>
+                                        </BoxItem>
+                                    ))
+                                ) : (
+                                    <BoxItem>No Task</BoxItem>
+                                )}
+                            </div>
 
                             <NewItemButton
                                 onClick={() => {
