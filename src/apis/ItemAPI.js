@@ -32,9 +32,9 @@ export const addItem = (id, payload) => {
 export const editItem = (id, groupID, payload) => {
   return new Promise((resolve, reject) => {
     const data = {
-      target_todo_id : groupID,
-      name: payload.name,
-      progress_percentage: payload.progress_percentage,
+        target_todo_id: payload.targetID ? payload.targetID : groupID,
+        name: payload.name,
+        progress_percentage: payload.progress_percentage,
     }
     axios
       .put(`/todos/${groupID}/items/${id}`, data)

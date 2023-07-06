@@ -31,7 +31,7 @@ export default function ModalEditItem({
         onHideModal(false);
       })
       .catch((error) => {
-        alert("Error saat mengubah data.", error);
+        alert("Error saat mengubah task.", error);
       });
   };
 

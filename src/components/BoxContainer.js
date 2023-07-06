@@ -62,9 +62,9 @@ const StyledBox = styled.div`
 }};
 `;
 
-export default function Box({ color, children, onDrop = () => {} }) {
+export default function Box({ color, children }) {
     return (
-        <StyledBox onDrop={onDrop} color={color}>
+        <StyledBox color={color}>
             {children}
         </StyledBox>
     );
