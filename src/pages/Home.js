@@ -84,16 +84,26 @@ export default function Home() {
     const getItemsForGroups = () => {
         groupData.forEach((group) => {
             getItems(group.id)
-                .then((response) => {
-                    const data = response.data;
-                    setItemData((prevItems) => ({
-                        ...prevItems,
-                        [group.id]: data,
-                    }));
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+              .then((response) => {
+                  const data = response.data;
+                  const sortedItems = sortItemsByTimestamp(data); // Sort items based on timestamp
+                  setItemData((prevItems) => ({
+                      ...prevItems,
+                      [group.id]: sortedItems,
+                  }));
+              })
+              .catch((error) => {
+                  console.error(error);
+              });
+        });
+    };
+
+    const sortItemsByTimestamp = (items) => {
+        // Sort items based on the 'created_at' or 'updated_at' timestamp in descending order
+        return items.sort((a, b) => {
+            const timestampA = new Date(a.updated_at || a.created_at);
+            const timestampB = new Date(b.updated_at || b.created_at);
+            return timestampB - timestampA;
         });
     };
 
