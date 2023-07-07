@@ -157,6 +157,66 @@ export default function Home() {
             });
     };
 
+    const moveTask = (groupID, taskID, taskIndex, task, direction) => {
+        const availableGroups = groupData.map((group) => group.id);
+        const currentIndex = availableGroups.indexOf(groupID);
+
+        let targetGroupID;
+        if (direction === "left") {
+            targetGroupID = findPreviousGroup(availableGroups, currentIndex);
+        } else if (direction === "right") {
+            targetGroupID = findNextGroup(availableGroups, currentIndex);
+        }
+
+        // Get the source group items and remove the task
+        const sourceGroupItems = [...itemData[groupID]];
+        const updatedSourceItems = sourceGroupItems.filter((item) => item.id !== taskID);
+
+        // Add the task to the destination group
+        const destinationGroupItems = [...(itemData[targetGroupID] || [])];
+        const updatedDestinationItems = [...destinationGroupItems, task];
+
+        // Update the itemData state
+        setItemData((prevItemData) => ({
+            ...prevItemData,
+            [groupID]: updatedSourceItems,
+            [targetGroupID]: updatedDestinationItems,
+        }));
+
+        // Send API request to update the task group_id
+        editItem(taskID, groupID, {
+            targetID: targetGroupID,
+            name: task.name,
+            progress_percentage: task.progress_percentage,
+        })
+          .then(() => {
+              if (setLoad) setLoad(new Date().getTime());
+          })
+          .catch((error) => {
+              console.error("Error moving task:", error);
+          });
+    };
+
+    // Find previous group
+    const findPreviousGroup = (groups, currentIndex) => {
+        for (let i = currentIndex - 1; i >= 0; i--) {
+            if (groups[i]) {
+                return groups[i];
+            }
+        }
+        return groups[currentIndex]; // Return the same group if no previous group found
+    };
+
+    // Find next group
+    const findNextGroup = (groups, currentIndex) => {
+        for (let i = currentIndex + 1; i < groups.length; i++) {
+            if (groups[i]) {
+                return groups[i];
+            }
+        }
+        return groups[currentIndex]; // Return the same group if no next group found
+    };
+
     return (
         <>
             {/* Modal components for adding new group, adding new item, editing item, and deleting item*/}
@@ -243,8 +303,8 @@ export default function Home() {
                                             style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}
                                         >
                                             {groupItems && groupItems.length > 0 ? (
-                                                groupItems.map((item, index) => (
-                                                    <Draggable draggableId={item.id.toString()} index={index} key={item.id}>
+                                                groupItems.map((item, taskIndex) => (
+                                                    <Draggable draggableId={item.id.toString()} index={taskIndex} key={item.id}>
                                                         {(provided) => (
                                                             <div
                                                                 ref={provided.innerRef}
@@ -260,12 +320,22 @@ export default function Home() {
                                                                         </div>
                                                                         <Setting>
                                                                             <div>
-                                                                                <SettingMenu color="primary" icon={<FiArrowRight />} >
-                                                                                    Move Right
-                                                                                </SettingMenu>
-                                                                                <SettingMenu color="primary" icon={<FiArrowLeft />} >
-                                                                                    Move Left
-                                                                                </SettingMenu>
+                                                                                {index !== groupData.length - 1 && (
+                                                                                    <SettingMenu color="primary" icon={<FiArrowRight />}
+                                                                                                onClick={() => {
+                                                                                                moveTask(groupData[index].id, item.id, taskIndex, item, "right");
+                                                                                    }} >
+                                                                                        Move Right
+                                                                                    </SettingMenu>
+                                                                                )}
+                                                                                {index !== 0 && (
+                                                                                    <SettingMenu color="primary" icon={<FiArrowLeft />}
+                                                                                                onClick={() => {
+                                                                                                moveTask(groupData[index].id, item.id, taskIndex, item, "left");
+                                                                                    }}>
+                                                                                        Move Left
+                                                                                    </SettingMenu>
+                                                                                )}
                                                                                 <SettingMenu color="primary" icon={<BiEditAlt />}
                                                                                              onClick={() => {
                                                                                                  setGroupID(group?.id);
