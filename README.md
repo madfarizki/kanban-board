@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Kanban Board
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a Kanban Board application built with React.JS.
 
-## Available Scripts
+## Demo
+Here is a working live demo: https://kanban-board.madfariz.my.id/
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Create new board
+- Create tasks in each board
+- Move tasks between boards with "Move Left" and "Move Right" actions
+- Edit tasks
+- Delete tasks
+- Real-time board updates after each action
+- Drag and drop mechanism for moving tasks between boards
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone the repository:
 
-### `npm test`
+   ```bash
+   git clone https://github.com/AhmdFarzki/kanban-board
+2. Navigate to the project directory:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   cd kanban-board
+3. Install the dependencies:
 
-### `npm run build`
+   ```bash
+   npm install
+4. Start the development server:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   npm start
+The application will be running at http://localhost:3000.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Configuration
+The application requires the backend server endpoints for task management. Update the API endpoint URLs in the src/axios.js file according to your backend server configuration. Update the `baseURL` variable with the URL of your backend server.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
+Once the development server is running, you can access the Kanban Board application in your web browser at http://localhost:3000/v1.
 
-### `npm run eject`
+- To create a new group, click on the "Add New Group" button in the top.
+- To create a new task, click on the "Add Task" button in the desired board and fill in the task details.
+- To move a task between boards, you have two options:
+    - Option 1: Click on the task card and use the "Move Left" and "Move Right" buttons to change its position.
+    - Option 2: Simply drag and drop the task card from one board to another.
+- To edit a task, click on the task card and select the "Edit" option. Update the task details and save the changes.
+- To delete a task, click on the task card and select the "Delete" option.
+- After each action (create, move, edit, and delete), the board will be automatically updated to reflect the changes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Created by Ahmad Alfarizki
