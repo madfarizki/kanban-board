@@ -1,55 +1,55 @@
 html,
 body {
-    padding: 0;
-    margin: 0;
-    font-family: "Nunito Sans", sans-serif;
-    min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  min-height: 100vh;
 }
 
 input, textarea {
-    font-family: "Nunito Sans", sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 section.main {
-    display: grid;
-    height: 100%;
-    gap: 16px;
-    padding: 24px;
+  display: grid;
+  height: 100%;
+  gap: 16px;
+  padding: 24px;
 }
 
 section.main .container {
-    width: 100%;
-    padding: 4px 0;
-    display: flex;
-    gap: 26px;
+  width: 100%;
+  padding: 4px 0;
+  display: flex;
+  gap: 26px;
 }
 
 /* Responsive */
 /* For screens with a maximum width of 768px (Mobile) */
 @media screen and (max-width: 768px) {
-    section.main {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
+  section.main {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 }
 
 /* For screens with a minimum width of 769px and a maximum width of 1024px (Tablet) */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-    section.main {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  section.main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* For screens with a minimum width of 1025px and a maximum width of 1366px (Desktop) */
 @media screen and (min-width: 1025px) and (max-width: 1366px) {
-    section.main {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+  section.main {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* For screens with a minimum width of 1367px (Large Desktop) */
 @media screen and (min-width: 1367px) {
-    section.main {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
+  section.main {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
