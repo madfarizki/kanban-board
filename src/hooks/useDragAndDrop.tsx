@@ -11,7 +11,10 @@ interface ItemData {
   [groupId: number]: ItemType[]
 }
 
-export function useDragAndDrop(initialItemData: ItemData, handleDataFetch: () => void) {
+export function useDragAndDrop(
+  initialItemData: ItemData,
+  handleDataFetch: () => void
+) {
   const [itemData, setItemData] = useState<ItemData>(initialItemData)
 
   useEffect(() => {
@@ -72,7 +75,7 @@ export function useDragAndDrop(initialItemData: ItemData, handleDataFetch: () =>
       progress_percentage: draggedItem.progress_percentage
     })
       .then(() => {
-        handleDataFetch();
+        handleDataFetch()
       })
       .catch(() => {
         alert('Error saat memindahkan task.')

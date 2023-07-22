@@ -48,16 +48,16 @@ const Home: React.FC = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem('token')) {
-      setLoad(new Date().getTime());
+      setLoad(new Date().getTime())
     }
-  }, [useSignIn()]);
+  }, [useSignIn()])
 
   const groupData = useFetchGroups(load)
   const itemData = useFetchItems(groupData)
 
   const handleDataFetch = () => {
-    setLoad(new Date().getTime());
-  };
+    setLoad(new Date().getTime())
+  }
 
   const { handleDragEnd, moveTask } = useDragAndDrop(itemData, handleDataFetch)
 
@@ -111,8 +111,10 @@ const Home: React.FC = () => {
                 onClick={() => {
                   setModalType(MODAL_SHOW.ADD_NEW_GROUP)
                   setShowModal(true)
-                }}>
-                <FaPlus size="12" style={{ marginRight: '4px' }} /> Add New Group
+                }}
+              >
+                <FaPlus size="12" style={{ marginRight: '4px' }} /> Add New
+                Group
               </Button>
             </Header>
           </section>
@@ -149,18 +151,21 @@ const Home: React.FC = () => {
                             flexDirection: 'column',
                             gap: '12px',
                             width: '100%'
-                          }}>
+                          }}
+                        >
                           {groupItems && groupItems.length > 0 ? (
                             groupItems.map((item, taskIndex) => (
                               <Draggable
                                 draggableId={item.id.toString()}
                                 index={taskIndex}
-                                key={item.id}>
+                                key={item.id}
+                              >
                                 {(provided: any) => (
                                   <div
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
-                                    {...provided.dragHandleProps}>
+                                    {...provided.dragHandleProps}
+                                  >
                                     <BoxItem>
                                       <ItemName>{item.name}</ItemName>
                                       <BorderLine />
@@ -186,7 +191,8 @@ const Home: React.FC = () => {
                                                     setLoad,
                                                     groupData
                                                   )
-                                                }}>
+                                                }}
+                                              >
                                                 Move Right
                                               </SettingMenu>
                                             )}
@@ -204,7 +210,8 @@ const Home: React.FC = () => {
                                                     setLoad,
                                                     groupData
                                                   )
-                                                }}>
+                                                }}
+                                              >
                                                 Move Left
                                               </SettingMenu>
                                             )}
@@ -214,9 +221,12 @@ const Home: React.FC = () => {
                                               onClick={() => {
                                                 setGroupID(group?.id)
                                                 setSelectedItem(item)
-                                                setModalType(MODAL_SHOW.EDIT_ITEM)
+                                                setModalType(
+                                                  MODAL_SHOW.EDIT_ITEM
+                                                )
                                                 setShowModal(true)
-                                              }}>
+                                              }}
+                                            >
                                               Edit
                                             </SettingMenu>
                                             <SettingMenu
@@ -225,9 +235,12 @@ const Home: React.FC = () => {
                                               onClick={() => {
                                                 setGroupID(group?.id)
                                                 setSelectedItem(item)
-                                                setModalType(MODAL_SHOW.DELETE_ITEM)
+                                                setModalType(
+                                                  MODAL_SHOW.DELETE_ITEM
+                                                )
                                                 setShowModal(true)
-                                              }}>
+                                              }}
+                                            >
                                               Delete
                                             </SettingMenu>
                                           </div>
@@ -250,7 +263,8 @@ const Home: React.FC = () => {
                         setGroupID(group.id)
                         setModalType(MODAL_SHOW.ADD_NEW_ITEM)
                         setShowModal(true)
-                      }}>
+                      }}
+                    >
                       New Task
                     </NewItemButton>
                   </BoxContainer>
@@ -258,10 +272,11 @@ const Home: React.FC = () => {
               })}
             </section>
           </DragDropContext>
-
         </>
       ) : (
-        <p style={{ textAlign: 'center' }}>Harap tunggu, sedang melakukan login otomatis.</p>
+        <p style={{ textAlign: 'center' }}>
+          Harap tunggu, sedang melakukan login otomatis.
+        </p>
       )}
     </>
   )

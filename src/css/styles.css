@@ -2,12 +2,13 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   min-height: 100vh;
 }
 
-input, textarea {
-  font-family: "Nunito Sans", sans-serif;
+input,
+textarea {
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 section.main {
@@ -24,7 +25,6 @@ section.main .container {
   gap: 26px;
 }
 
-/* Responsive */
 /* For screens with a maximum width of 768px (Mobile) */
 @media screen and (max-width: 768px) {
   section.main {
@@ -52,4 +52,3 @@ section.main .container {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
-
