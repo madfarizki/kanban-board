@@ -1,20 +1,12 @@
 import axios from '../axios.tsx'
 
 // Auth login
-export const signIn = (payload: any) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post(`/auth/login`, payload)
-      .then((response) => {
-        const token = response.data.auth_token // Assuming the token is returned in the response
+export const signIn = async (payload: any) => {
+  const response = await axios.post(`/auth/login`, payload);
+  const token = response.data.auth_token;
 
-        // Store the token in local storage
-        localStorage.setItem('token', token)
+  // Store the token in local storage
+  localStorage.setItem('token', token);
 
-        resolve(response)
-      })
-      .catch((error) => {
-        reject(error)
-      })
-  })
-}
+  return response;
+};
